@@ -7712,8 +7712,9 @@ globalThis.DataUtil = class {
 		static async loadJSON () {
 			const rawData = await super.loadJSON();
 			const rawDataGenerated = await DataUtil.loadJSON(`${Renderer.get().baseUrl}data/generated/gendata-variantrules.json`);
+			const rawDataV20 = await DataUtil.loadJSON(`${Renderer.get().baseUrl}data/variantrules-v20.json`);
 
-			return {variantrule: [...rawData.variantrule, ...rawDataGenerated.variantrule]};
+			return {variantrule: [...rawData.variantrule, ...rawDataGenerated.variantrule, ...rawDataV20.variantrule]};
 		}
 	};
 
