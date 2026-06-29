@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include the standard 5etools header macros/styles here -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="viewport-wrapper">
+        <main class="container view-fields">
+            <h1>V20 Custom Compendium</h1>
+            <div id="v20-list" class="list"></div>
+        </main>
+    </div>
+
+    <script>
+        // Simple fetch script to render your custom JSON format
+        async function loadV20Data() {
+            const res = await fetch('data/v20-compendium.json');
+            const data = await res.json();
+            const container = document.getElementById('v20-list');
+            
+            data.items.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'v20-entry m-3 p-3 border';
+                itemEl.innerHTML = `
+                    <h3>${item.name} (${item.type})</h3>
+                    <p><strong>Reference:</strong> ${item.system.reference || 'N/A'}</p>
+                    <div>${item.system.description || ''}</div>
+                    <div><small>${item.system.details || ''}</small></div>
+                `;
+                container.appendChild(itemEl);
+            });
+        }
+        window.addEventListener('DOMContentLoaded', loadV20Data);
+    </script>
+</body>
+</html>
